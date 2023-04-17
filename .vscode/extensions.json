@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "vue.volar",
+    "graphql.vscode-graphql-syntax",
+    "GraphQL.vscode-graphql"
+  ]
+}

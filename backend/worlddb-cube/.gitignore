@@ -1,0 +1,9 @@
+node_modules
+.cubestore
+upstream
+.env*.local
+*.rdb
+build
+
+*-key.json
+postgres-data

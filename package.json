@@ -1,0 +1,28 @@
+{
+  "name": "cubeviz",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "backend/*",
+    "libs/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel --filter=demo-app...",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "turbo": "turbo"
+  },
+  "dependencies": {
+    "graphql-config": "^4.3.6",
+    "prettier": "^2.8.0",
+    "turbo": "^1.4.6"
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
+  },
+  "packageManager": "pnpm@7.4.1"
+}

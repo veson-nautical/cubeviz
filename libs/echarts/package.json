@@ -1,0 +1,34 @@
+{
+  "name": "@cubeviz/echarts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "prebuild": "barrelsby -d src -q -D",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "dev": "tsc --watch",
+    "lint": "TIMING=1 eslint src/**/*.ts* --fix"
+  },
+  "dependencies": {
+    "@cubeviz/core": "workspace:*",
+    "echarts": "^5.3.2",
+    "echarts-for-react": "^3.0.2",
+    "@blueprintjs/core": "^4.5.1",
+    "typed-data-table": "^1.2.4"
+  },
+  "devDependencies": {
+    "barrelsby": "^2.5.1",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "typescript": "4.9.3",
+    "eslint": "^7.23.0",
+    "eslint-config-next": "^12.0.8",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "7.28.0",
+    "prettier": "^2.8.0"
+  },
+  "peerDependencies": {
+    "react": "18",
+    "react-dom": "18"
+  }
+}

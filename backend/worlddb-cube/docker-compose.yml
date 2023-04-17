@@ -1,0 +1,48 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5438:5432'
+    volumes: 
+      - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      - ./sql/:/docker-entrypoint-initdb.d/
+  
+  redis:
+    image: redis:6
+    restart: always
+
+  cube:    
+    image: cubejs/cube:latest
+    depends_on:
+      - redis
+      - postgres
+    links:
+      - redis
+      - postgres
+    ports:
+      # It's better to use random port binding for 4000/3000 ports
+      # without it you will not able to start multiple projects inside docker
+      - 4000:4000
+      # - 3000:3000  # Dashboard app, if created    
+    environment:
+      - CUBEJS_DB_TYPE=postgres
+      - CUBEJS_DB_USER=postgres
+      - CUBEJS_DB_PASS=postgres
+      - CUBEJS_DB_HOST=postgres
+      - CUBEJS_DB_PORT=5432
+      - CUBEJS_DB_NAME=postgres
+      - CUBEJS_API_SECRET=secret
+      - CUBEJS_DEV_MODE=true
+    volumes:      
+      # If you are going to use own dependencies, for example axios/vault or anything else for getting configuration      
+      - ./conf:/cube/conf

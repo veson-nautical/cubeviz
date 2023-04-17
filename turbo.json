@@ -1,0 +1,43 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "prebuild": {
+      "outputs": ["src/index.ts"]
+    },
+    "build": {
+      "dependsOn": [
+        "prebuild",
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "out/**",
+        "storybook-static/**"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": [
+        "coverage/**"
+      ]
+    },
+    "deploy": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
