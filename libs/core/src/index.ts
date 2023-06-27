@@ -11,6 +11,7 @@ export * from './hooks/use-deep-memo';
 export * from './hooks/use-last-value';
 export * from './hooks/use-prepare-dimension-cube-query';
 export * from './hooks/use-set-object-value';
+export * from './hooks/use-list-helpers';
 export * from './utils/auto-format-cube-value';
 export * from './utils/auto-format-number';
 export * from './utils/deep-equal';

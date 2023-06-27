@@ -8,15 +8,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "13.1.1",
-    "next": "13.1.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "@blueprintjs/core": "^4.5.1",
+    "@blueprintjs/icons": "^5.0.0",
+    "@blueprintjs/datetime": "^4.4.23",
+    "@blueprintjs/popover2": "^1.13.8",
+    "@blueprintjs/select": "^4.9.8",
     "@cubejs-client/core": "^0.30.64",
     "@cubejs-client/react": "^0.30.69",
     "@cubeviz/core": "workspace:*",
-    "@cubeviz/echarts": "workspace:*"
+    "@cubeviz/echarts": "workspace:*",
+    "@cubeviz/inputs": "workspace:*",
+    "@cubeviz/table": "workspace:*",
+    "@next/font": "13.1.1",
+    "next": "13.1.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

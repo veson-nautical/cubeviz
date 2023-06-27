@@ -18,11 +18,11 @@
   "dependencies": {
     "graphql-config": "^4.3.6",
     "prettier": "^2.8.0",
-    "turbo": "^1.4.6"
+    "turbo": "^1.8.8"
   },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
-  "packageManager": "pnpm@7.4.1"
+  "packageManager": "pnpm@8.3.1"
 }

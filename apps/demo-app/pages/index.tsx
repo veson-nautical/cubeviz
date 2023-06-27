@@ -1,11 +1,44 @@
 import { NonIdealState, Spinner } from '@blueprintjs/core';
-import { CubeVizContextProvider } from '@cubeviz/core';
+import { CubeVizContextProvider, filterNulls } from '@cubeviz/core';
 import Head from 'next/head';
 import { useCubeApi } from '../hooks/use-cube-api';
 import { EChartsXYChart } from '@cubeviz/echarts';
+import { AgGridTable } from '@cubeviz/table';
+import { CubeMultiSelect, CubeSuggest } from '@cubeviz/inputs';
+import { useMemo, useState } from 'react';
+import { Query } from '@cubejs-client/core';
+
+function WidgetCard({ children }: { children: React.ReactNode }) {
+  return <div className="w-[30rem] h-[20rem] m-2">{children}</div>;
+}
 
 export default function Home() {
   const cubeApi = useCubeApi();
+  const [selectedCountries, setSelectedCountries] = useState([] as string[]);
+  const [selectedDistrict, setSelectedDistrict] = useState<undefined | string>(
+    undefined
+  );
+  const chartsBaseQuery = useMemo<Query>(
+    () => ({
+      filters: filterNulls([
+        selectedCountries && selectedCountries.length > 0
+          ? {
+              member: 'Countries.name',
+              operator: 'equals',
+              values: selectedCountries,
+            }
+          : undefined,
+        selectedDistrict
+          ? {
+              member: 'Cities.district',
+              operator: 'equals',
+              values: [selectedDistrict],
+            }
+          : undefined,
+      ]),
+    }),
+    [selectedCountries, selectedDistrict]
+  );
   return (
     <>
       <Head>
@@ -28,11 +61,52 @@ export default function Home() {
             <NonIdealState icon={<Spinner />} title="Loading cubes..." />
           }
         >
-          <EChartsXYChart
-            x="Countries.continent"
-            y="Countries.totalPopulation"
-            chartType="bar"
-          />
+          <div className="flex gap-8 p-8">
+            <CubeMultiSelect
+              title="Country name"
+              labelBinding="Countries.name"
+              valueBinding="Countries.totalPopulation"
+              selectedItems={selectedCountries}
+              setSelectedItems={(items) => {
+                setSelectedCountries(items);
+                setSelectedDistrict(undefined);
+              }}
+            />
+            {selectedCountries.length > 0 && (
+              <CubeSuggest
+                labelBinding="Cities.district"
+                valueBinding="Cities.population"
+                selectedItem={selectedDistrict}
+                baseQuery={{
+                  filters: [
+                    {
+                      member: 'Countries.name',
+                      operator: 'equals',
+                      values: selectedCountries,
+                    },
+                  ],
+                }}
+                setSelectedItem={(item) => setSelectedDistrict(item)}
+              />
+            )}
+          </div>
+          <div className="flex">
+            <WidgetCard>
+              <EChartsXYChart
+                x="Cities.name"
+                y="Cities.population"
+                binOther={10}
+                chartType="bar"
+                baseQuery={chartsBaseQuery}
+              />
+            </WidgetCard>
+            <WidgetCard>
+              <AgGridTable
+                columns={['Cities.name', 'Cities.population']}
+                baseQuery={chartsBaseQuery}
+              />
+            </WidgetCard>
+          </div>
         </CubeVizContextProvider>
       </main>
     </>
