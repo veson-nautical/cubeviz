@@ -1,5 +1,13 @@
 # @cubeviz/inputs
 
+## 0.1.2
+
+### Patch Changes
+
+- e388efc: add readmes for libs
+- Updated dependencies [e388efc]
+  - @cubeviz/core@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

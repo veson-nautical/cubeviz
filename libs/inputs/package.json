@@ -1,7 +1,7 @@
 {
   "name": "@cubeviz/inputs",
   "description": "React component library for cubejs - blueprintjs input components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "homepage": "https://github.com/veson-nautical/cubeviz",
   "repository": "github:veson-nautical/cubeviz",
