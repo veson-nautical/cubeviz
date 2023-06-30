@@ -1,6 +1,7 @@
 {
   "name": "@cubeviz/inputs",
   "version": "0.1.0",
+  "readme": "../../README.md",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
