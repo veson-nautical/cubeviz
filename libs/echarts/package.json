@@ -1,7 +1,7 @@
 {
   "name": "@cubeviz/echarts",
   "description": "React component library for cubejs - echarts visualizations",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "readme": "../../README.md",
   "license": "MIT",
   "homepage": "https://github.com/veson-nautical/cubeviz",
