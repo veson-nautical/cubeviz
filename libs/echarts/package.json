@@ -1,7 +1,7 @@
 {
   "name": "@cubeviz/echarts",
-  "description": "React component library for cubejs - echarts visualizations",
-  "version": "0.1.2",
+  "description": "React component library for cube - echarts visualizations",
+  "version": "0.1.1",
   "license": "MIT",
   "homepage": "https://github.com/veson-nautical/cubeviz",
   "repository": "github:veson-nautical/cubeviz",
@@ -21,7 +21,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup --dts",
     "dev": "tsup --watch",
     "prebuild": "barrelsby -d src -q -D",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",

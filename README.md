@@ -1,8 +1,10 @@
 # Cubeviz
 
-A series of prebuilt React components for visualizing data from [cube](https://cube.dev/) API.
+A series of prebuilt React components for visualizing data from [cube](https://cube.dev/) APIs.
 
 These components are driven by metadata and knowledge of the cube schema in order to minimize configuration required and work out-of-the-box despite some sacrifice of flexibility because sometimes you want more control than a BI tool, but you still want to control the code around it.
+
+![Alt text](screenshot.png?raw=true "Cubeviz Screenshot")
 
 ## Setup
 

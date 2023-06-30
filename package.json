@@ -7,7 +7,7 @@
     "libs/*"
   ],
   "scripts": {
-    "dev": "turbo run dev --parallel --filter=demo-app...",
+    "dev": "turbo run dev --filter=demo-app...",
     "build": "turbo run build",
     "test": "turbo run test",
     "clean": "turbo run clean",

@@ -1,7 +1,7 @@
 {
   "name": "@cubeviz/table",
-  "description": "React component library for cubejs - ag-grid table compoennts",
-  "version": "0.1.2",
+  "description": "React component library for cube - ag-grid table compoennts",
+  "version": "0.1.1",
   "license": "MIT",
   "homepage": "https://github.com/veson-nautical/cubeviz",
   "repository": "github:veson-nautical/cubeviz",
@@ -21,7 +21,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup --dts",
     "dev": "tsup --watch",
     "prebuild": "barrelsby -d src -q -D",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
