@@ -1,13 +1,25 @@
 {
   "name": "@cubeviz/echarts",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "version": "0.0.0",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "prebuild": "barrelsby -d src -q -D",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-    "dev": "tsc --watch",
-    "lint": "TIMING=1 eslint src/**/*.ts* --fix"
+    "lint": "eslint src/**/*.ts* --fix"
   },
   "dependencies": {
     "@cubeviz/core": "workspace:*",

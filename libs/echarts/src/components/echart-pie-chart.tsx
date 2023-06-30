@@ -10,6 +10,7 @@ import {
   cubeAutoFormatter,
   CubevizComponent,
   getCubeColumn,
+  useCubeTheme,
   useDashboardCubeQuery,
   useMeta,
   usePrepareDimensionCubeQuery,
@@ -30,9 +31,9 @@ export const EChartsPieChart: CubevizComponent<EChartPieWidgetParams> = ({
   onDrillDown,
   binOther,
   baseQuery,
-  theme,
 }) => {
   const meta = useMeta();
+  const theme = useCubeTheme();
   const bindings = useMemo(() => [value, color], [value, color]);
   const query = usePrepareDimensionCubeQuery(bindings, undefined, baseQuery);
   const { lastResults, error, isLoading } = useDashboardCubeQuery(query);

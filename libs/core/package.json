@@ -1,13 +1,25 @@
 {
   "name": "@cubeviz/core",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "version": "0.0.0",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "prebuild": "barrelsby -d src -q -D",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-    "dev": "tsc --watch",
-    "lint": "TIMING=1 eslint src/**/*.ts* --fix"
+    "lint": "eslint src/**/*.ts* --fix"
   },
   "dependencies": {
     "@cubejs-client/core": "^0.30.64",
@@ -21,14 +33,15 @@
     "@types/luxon": "^3.2.0",
     "@types/numeral": "^2.0.2",
     "barrelsby": "^2.5.1",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
-    "typescript": "4.9.3",
     "eslint": "^7.23.0",
     "eslint-config-next": "^12.0.8",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "7.28.0",
-    "prettier": "^2.8.0"
+    "prettier": "^2.8.0",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "tsup": "^7.1.0",
+    "typescript": "4.9.3"
   },
   "peerDependencies": {
     "react": "18",

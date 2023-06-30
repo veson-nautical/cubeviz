@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "React Library",
   "compilerOptions": {
     "composite": false,
     "declaration": true,

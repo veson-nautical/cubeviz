@@ -1,17 +1,12 @@
-import {
-  Button,
-  ButtonProps,
-  FormGroup,
-  MenuItem,
-  Spinner,
-} from '@blueprintjs/core';
+import { Button, ButtonProps, MenuItem, Spinner } from '@blueprintjs/core';
 import { Select2, Select2Props } from '@blueprintjs/select';
 import { CubevizComponent, useMeta } from '@cubeviz/core';
 import { useMemo } from 'react';
-import { useSelectItemsQuery } from '../hooks/use-select-items-query';
 import { useDebouncedQuerySideEffect } from '../hooks/use-debounced-query-side-effect';
+import { useSelectItemsQuery } from '../hooks/use-select-items-query';
 import { BlueprintSelectItem } from '../types/blueprint-select-item';
 import { BaseInputItem } from './base-input-item';
+import { CubeInputFormGroup } from './cube-input-form-group';
 
 export interface CubeSelectParams {
   labelBinding: string;
@@ -56,12 +51,7 @@ export const CubeSelect: CubevizComponent<CubeSelectParams> = ({
     title ?? meta.dimensions[labelBinding].shortTitle.trim();
 
   return (
-    <FormGroup
-      label={dimensionTitle}
-      inline
-      intent={error ? 'danger' : 'none'}
-      helperText={error ? error.message : undefined}
-    >
+    <CubeInputFormGroup title={dimensionTitle} errorMessage={error?.message}>
       <Select2<BlueprintSelectItem>
         fill
         className="minimal"
@@ -115,6 +105,6 @@ export const CubeSelect: CubevizComponent<CubeSelectParams> = ({
           {...buttonProps}
         />
       </Select2>
-    </FormGroup>
+    </CubeInputFormGroup>
   );
 };

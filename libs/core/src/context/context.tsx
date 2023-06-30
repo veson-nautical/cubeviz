@@ -7,12 +7,20 @@ import { LastValueContextProvider } from '../hooks/use-last-value';
 export interface CubeConfigContextType {
   cubes: string[];
   meta: Record<string, CubeMeta>;
+  theme: 'light' | 'dark';
 }
 
-export const CubeConfigContext = React.createContext<CubeConfigContextType>(
-  null!
-);
+export const CubeConfigContext = React.createContext<CubeConfigContextType>({
+  cubes: [],
+  meta: {},
+  theme: 'light',
+});
 export const useCubeConfig = () => React.useContext(CubeConfigContext);
+
+export function useCubeTheme() {
+  const { theme } = useCubeConfig();
+  return theme;
+}
 
 export const useMeta = () => {
   const { meta } = useCubeConfig();
@@ -34,15 +42,15 @@ export const useMeta = () => {
 };
 
 export interface CubeVizContextProviderProps {
+  theme?: 'light' | 'dark';
   cubejsApi?: CubejsApi;
-  defaultCube?: string;
   renderError?: (err: Error) => React.ReactNode;
   loadingDisplay?: React.ReactNode;
 }
 
 export const CubeVizContextProvider: React.FC<
   React.PropsWithChildren<CubeVizContextProviderProps>
-> = ({ cubejsApi, defaultCube, renderError, loadingDisplay, children }) => {
+> = ({ cubejsApi, renderError, theme, loadingDisplay, children }) => {
   const { response, isLoading, error } = useCubeMeta({ cubejsApi });
   const cubeMeta = useMemo(
     // the cube type is wrong, so we recast it to the actual type
@@ -72,6 +80,7 @@ export const CubeVizContextProvider: React.FC<
           value={{
             meta: cubeMeta,
             cubes: Object.keys(cubeMeta),
+            theme: theme ?? 'light',
           }}
         >
           {children}

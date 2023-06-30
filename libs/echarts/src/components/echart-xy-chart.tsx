@@ -15,6 +15,7 @@ import {
   CubeMeta,
   CubevizComponent,
   getCubeColumn,
+  useCubeTheme,
   useDashboardCubeQuery,
   useMeta,
   usePrepareDimensionCubeQuery,
@@ -43,7 +44,6 @@ export function isDrillable(param: string, meta: CubeMeta) {
 export const EChartsXYChart: CubevizComponent<EChartWidgetParams> = ({
   chartType,
   onDrillDown,
-  theme,
   x,
   y,
   baseQuery,
@@ -55,6 +55,7 @@ export const EChartsXYChart: CubevizComponent<EChartWidgetParams> = ({
   title,
 }) => {
   const meta = useMeta();
+  const theme = useCubeTheme();
   const bindings = useMemo(() => filterNulls([x, y, color]), [x, y, color]);
   const query = usePrepareDimensionCubeQuery(
     bindings,

@@ -3,7 +3,6 @@ import React from 'react';
 
 export interface CubevizComponentBaseParams {
   baseQuery?: Query;
-  theme?: 'light' | 'dark';
 }
 export type CubevizComponentParams<T> = T & CubevizComponentBaseParams;
 

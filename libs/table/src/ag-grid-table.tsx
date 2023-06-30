@@ -4,6 +4,7 @@ import {
   CubevizComponent,
   cubeAutoFormatter,
   getCubeColumn,
+  useCubeTheme,
   useDashboardCubeQuery,
   useMeta,
   usePrepareDimensionCubeQuery,
@@ -25,11 +26,11 @@ export interface TableWidgetParams {
 export const AgGridTable: CubevizComponent<TableWidgetParams> = ({
   columns,
   timeDimensionGranularity,
-  theme,
   onDrillDown,
   baseQuery,
 }) => {
   const meta = useMeta();
+  const theme = useCubeTheme();
   const query = usePrepareDimensionCubeQuery(
     columns,
     timeDimensionGranularity,

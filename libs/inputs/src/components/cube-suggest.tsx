@@ -1,4 +1,4 @@
-import { Button, FormGroup, MenuItem, Spinner } from '@blueprintjs/core';
+import { Button, MenuItem, Spinner } from '@blueprintjs/core';
 import { Select2Props, Suggest2 } from '@blueprintjs/select';
 import { CubevizComponent, useMeta } from '@cubeviz/core';
 import { useMemo } from 'react';
@@ -6,6 +6,7 @@ import { useDebouncedQuerySideEffect } from '../hooks/use-debounced-query-side-e
 import { useSelectItemsQuery } from '../hooks/use-select-items-query';
 import { BlueprintSelectItem } from '../types/blueprint-select-item';
 import { BaseInputItem } from './base-input-item';
+import { CubeInputFormGroup } from './cube-input-form-group';
 
 export interface CubeSuggestParams {
   labelBinding: string;
@@ -48,12 +49,7 @@ export const CubeSuggest: CubevizComponent<CubeSuggestParams> = ({
     title ?? meta.dimensions[labelBinding].shortTitle.trim();
 
   return (
-    <FormGroup
-      label={dimensionTitle}
-      inline
-      intent={error ? 'danger' : 'none'}
-      helperText={error ? error.message : undefined}
-    >
+    <CubeInputFormGroup title={dimensionTitle} errorMessage={error?.message}>
       <Suggest2<BlueprintSelectItem>
         query={inputValue}
         onQueryChange={(query) => setInputValue(query)}
@@ -111,6 +107,6 @@ export const CubeSuggest: CubevizComponent<CubeSuggestParams> = ({
           ...suggestProps?.inputProps,
         }}
       />
-    </FormGroup>
+    </CubeInputFormGroup>
   );
 };

@@ -1,7 +1,6 @@
 import {
   Button,
   ButtonGroup,
-  FormGroup,
   Menu,
   MenuItem,
   Spinner,
@@ -13,10 +12,11 @@ import {
 } from '@blueprintjs/select';
 import { CubevizComponent, useListHelpers, useMeta } from '@cubeviz/core';
 import { useCallback, useMemo } from 'react';
-import { useSelectItemsQuery } from '../hooks/use-select-items-query';
 import { useDebouncedQuerySideEffect } from '../hooks/use-debounced-query-side-effect';
+import { useSelectItemsQuery } from '../hooks/use-select-items-query';
 import { BlueprintSelectItem } from '../types/blueprint-select-item';
 import { BaseInputItem } from './base-input-item';
+import { CubeInputFormGroup } from './cube-input-form-group';
 
 export interface CubeMultiSelectParams {
   labelBinding: string;
@@ -116,12 +116,7 @@ export const CubeMultiSelect: CubevizComponent<CubeMultiSelectParams> = ({
     title ?? meta.dimensions[labelBinding].shortTitle.trim();
 
   return (
-    <FormGroup
-      label={dimensionTitle}
-      inline
-      intent={error ? 'danger' : 'none'}
-      helperText={error ? error.message : undefined}
-    >
+    <CubeInputFormGroup title={dimensionTitle} errorMessage={error?.message}>
       <MultiSelect2<BlueprintSelectItem>
         fill
         className="minimal"
@@ -195,6 +190,6 @@ export const CubeMultiSelect: CubevizComponent<CubeMultiSelectParams> = ({
           setInputValue('');
         }}
       />
-    </FormGroup>
+    </CubeInputFormGroup>
   );
 };
