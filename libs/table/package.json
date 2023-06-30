@@ -1,8 +1,12 @@
 {
   "name": "@cubeviz/table",
+  "description": "React component library for cubejs - ag-grid table compoennts",
   "version": "0.1.0",
   "readme": "../../README.md",
   "license": "MIT",
+  "homepage": "https://github.com/veson-nautical/cubeviz",
+  "repository": "github:veson-nautical/cubeviz",
+  "author": "Michael Shafir <mshafir@veson.com>",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
