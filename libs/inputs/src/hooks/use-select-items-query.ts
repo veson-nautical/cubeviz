@@ -9,16 +9,19 @@ import { useMemo } from 'react';
 import { BlueprintSelectItem } from 'src/types/blueprint-select-item';
 
 export function useSelectItemsQuery(
-  labelBinding: string,
-  valueBinding?: string,
+  valueBinding: string,
+  labelBinding?: string,
   baseQuery?: Query
 ) {
   const meta = useMeta();
-  const valueBindingPresent =
-    valueBinding && valueBinding in meta.measures ? valueBinding : undefined;
+  const labelMeasure = useMemo(() => {
+    const resolved = meta.resolveMember(labelBinding ?? '', 'measures');
+    return 'error' in resolved ? undefined : resolved;
+  }, [meta, labelBinding]);
+  const labelMeasureName = labelMeasure?.name;
   const bindings = useMemo(
-    () => filterNulls([labelBinding, valueBindingPresent]),
-    [labelBinding, valueBindingPresent]
+    () => filterNulls([valueBinding, labelMeasureName]),
+    [valueBinding, labelMeasureName]
   );
   const query = usePrepareDimensionCubeQuery(bindings, undefined, baseQuery);
   const { lastResults, error, isLoading } = useDashboardCubeQuery(query);
@@ -26,21 +29,21 @@ export function useSelectItemsQuery(
   const items = useMemo(() => {
     if (lastResults) {
       return lastResults.rawData().map((row) => {
-        const valueBinding = valueBindingPresent
-          ? parseInt(row[valueBindingPresent]).toLocaleString(undefined, {
+        const labelBinding = labelMeasure
+          ? parseInt(row[labelMeasure.name]).toLocaleString(undefined, {
               minimumFractionDigits: 0,
-            }) + ` ${meta.measures[valueBindingPresent].shortTitle}`
+            }) + ` ${labelMeasure.shortTitle}`
           : undefined;
         return {
-          label: row[labelBinding],
-          value: valueBinding,
-          text: valueBinding,
+          label: labelBinding,
+          value: row[valueBinding],
+          text: row[valueBinding],
           row,
         } as BlueprintSelectItem;
       });
     }
     return [];
-  }, [lastResults, labelBinding, valueBindingPresent, meta]);
+  }, [lastResults, valueBinding, labelMeasure]);
 
   return { items, error, isLoading };
 }

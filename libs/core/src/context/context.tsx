@@ -1,4 +1,11 @@
-import { CubejsApi } from '@cubejs-client/core';
+import {
+  CubejsApi,
+  Meta,
+  Query,
+  TCubeDimension,
+  TCubeMeasure,
+  TCubeSegment,
+} from '@cubejs-client/core';
 import { CubeProvider, useCubeMeta } from '@cubejs-client/react';
 import React, { useMemo } from 'react';
 import { CubeMeta } from '../cube-meta';
@@ -6,13 +13,13 @@ import { LastValueContextProvider } from '../hooks/use-last-value';
 
 export interface CubeConfigContextType {
   cubes: string[];
-  meta: Record<string, CubeMeta>;
+  meta: Meta;
   theme: 'light' | 'dark';
 }
 
 export const CubeConfigContext = React.createContext<CubeConfigContextType>({
   cubes: [],
-  meta: {},
+  meta: null!,
   theme: 'light',
 });
 export const useCubeConfig = () => React.useContext(CubeConfigContext);
@@ -22,24 +29,39 @@ export function useCubeTheme() {
   return theme;
 }
 
-export const useMeta = () => {
+function reduceByName<T extends { name: string }>(
+  data: T[]
+): Record<string, T> {
+  return data.reduce((obj, e) => {
+    obj[e.name] = e;
+    return obj;
+  }, {} as Record<string, T>);
+}
+
+export function useMeta() {
   const { meta } = useCubeConfig();
-  // combine the individual cube meta into a single object
-  const combinedMeta = useMemo(() => {
-    const result: CubeMeta = {
-      measures: {} as any,
-      dimensions: {} as any,
-      segments: {} as any,
-    };
-    for (const cube of Object.values(meta)) {
-      result.measures = { ...result.measures, ...cube.measures };
-      result.dimensions = { ...result.dimensions, ...cube.dimensions };
-      result.segments = { ...result.segments, ...cube.segments };
-    }
-    return result;
-  }, [meta]);
-  return combinedMeta;
-};
+  return meta;
+}
+
+export function useMetaForQuery(query: Query): CubeMeta {
+  const meta = useMeta();
+  return useMemo<CubeMeta>(
+    () => ({
+      dimensions: reduceByName(
+        meta.membersForQuery(query, 'dimensions')
+      ) as Record<string, TCubeDimension>,
+      measures: reduceByName(meta.membersForQuery(query, 'measures')) as Record<
+        string,
+        TCubeMeasure
+      >,
+      segments: reduceByName(meta.membersForQuery(query, 'segments')) as Record<
+        string,
+        TCubeSegment
+      >,
+    }),
+    [meta, query]
+  );
+}
 
 export interface CubeVizContextProviderProps {
   theme?: 'light' | 'dark';
@@ -54,7 +76,7 @@ export const CubeVizContextProvider: React.FC<
   const { response, isLoading, error } = useCubeMeta({ cubejsApi });
   const cubeMeta = useMemo(
     // the cube type is wrong, so we recast it to the actual type
-    () => response?.cubesMap as any as Record<string, CubeMeta>,
+    () => response,
     [response]
   );
   if (error) {

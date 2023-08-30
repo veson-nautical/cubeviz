@@ -1,5 +1,9 @@
 import { FormGroup, NonIdealState } from '@blueprintjs/core';
-import { CubevizComponent, isSetStateFunction, useMeta } from '@cubeviz/core';
+import {
+  CubevizComponent,
+  isSetStateFunction,
+  useDimensionTitle,
+} from '@cubeviz/core';
 import {
   relativeDateToString,
   stringToRelativeDate,
@@ -35,10 +39,7 @@ export const CubeDateRange: CubevizComponent<CubeDateRangeProps> = ({
   options,
   setValue,
 }) => {
-  const meta = useMeta();
-  const dimensionTitle = cubeBinding
-    ? meta.dimensions[cubeBinding].shortTitle
-    : '';
+  const dimensionTitle = useDimensionTitle(cubeBinding);
   const binding = cubeBinding ?? '';
   if (!binding) {
     return (

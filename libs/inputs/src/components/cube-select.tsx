@@ -1,6 +1,6 @@
 import { Button, ButtonProps, MenuItem, Spinner } from '@blueprintjs/core';
 import { Select2, Select2Props } from '@blueprintjs/select';
-import { CubevizComponent, useMeta } from '@cubeviz/core';
+import { CubevizComponent, useDimensionTitle } from '@cubeviz/core';
 import { useMemo } from 'react';
 import { useDebouncedQuerySideEffect } from '../hooks/use-debounced-query-side-effect';
 import { useSelectItemsQuery } from '../hooks/use-select-items-query';
@@ -9,8 +9,8 @@ import { BaseInputItem } from './base-input-item';
 import { CubeInputFormGroup } from './cube-input-form-group';
 
 export interface CubeSelectParams {
-  labelBinding: string;
-  valueBinding?: string;
+  valueBinding: string;
+  labelBinding?: string;
   title?: string;
   selectProps?: Partial<Select2Props<BlueprintSelectItem>>;
   buttonProps?: Partial<ButtonProps>;
@@ -28,10 +28,9 @@ export const CubeSelect: CubevizComponent<CubeSelectParams> = ({
   buttonProps,
   title,
 }) => {
-  const meta = useMeta();
   const { items, error, isLoading } = useSelectItemsQuery(
-    labelBinding,
     valueBinding,
+    labelBinding,
     baseQuery
   );
 
@@ -47,8 +46,8 @@ export const CubeSelect: CubevizComponent<CubeSelectParams> = ({
     [items, selectedItem]
   );
 
-  const dimensionTitle =
-    title ?? meta.dimensions[labelBinding].shortTitle.trim();
+  const dimensionTitleBinding = useDimensionTitle(valueBinding);
+  const dimensionTitle = title ?? dimensionTitleBinding;
 
   return (
     <CubeInputFormGroup title={dimensionTitle} errorMessage={error?.message}>

@@ -14,14 +14,15 @@ export function usePrepareDimensionCubeQuery(
     const measures: string[] = [];
     for (const dim of dimensionsMetrics ?? []) {
       if (!dim) continue;
-      if (dim in meta.dimensions) {
-        if (meta.dimensions[dim].type == 'time') {
+      const dimMember = meta.resolveMember(dim, 'dimensions');
+      if ('error' in dimMember) {
+        measures.push(dim);
+      } else {
+        if (dimMember.type == 'time') {
           timeDimensions.push(dim);
         } else {
           dimensions.push(dim);
         }
-      } else {
-        measures.push(dim);
       }
     }
     const result: Query = {

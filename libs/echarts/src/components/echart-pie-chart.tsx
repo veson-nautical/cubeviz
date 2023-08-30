@@ -1,20 +1,20 @@
 import { NonIdealState, Spinner } from '@blueprintjs/core';
-import { EChartsOption } from 'echarts';
-import { useCallback, useMemo } from 'react';
-import { Table } from 'typed-data-table';
-import { EChartsBaseComponent } from './echarts-base-component';
-import { binOtherRows } from '../utils/bin-other-rows';
-import { positionTooltip } from '../utils/position-tooltip';
-import { sortChartAxis } from '../utils/sort-chart-axis';
 import {
-  cubeAutoFormatter,
   CubevizComponent,
+  cubeAutoFormatter,
   getCubeColumn,
   useCubeTheme,
   useDashboardCubeQuery,
-  useMeta,
+  useMetaForQuery,
   usePrepareDimensionCubeQuery,
 } from '@cubeviz/core';
+import { EChartsOption } from 'echarts';
+import { useCallback, useMemo } from 'react';
+import { Table } from 'typed-data-table';
+import { binOtherRows } from '../utils/bin-other-rows';
+import { positionTooltip } from '../utils/position-tooltip';
+import { sortChartAxis } from '../utils/sort-chart-axis';
+import { EChartsBaseComponent } from './echarts-base-component';
 
 export interface EChartPieWidgetParams {
   title?: string;
@@ -32,10 +32,10 @@ export const EChartsPieChart: CubevizComponent<EChartPieWidgetParams> = ({
   binOther,
   baseQuery,
 }) => {
-  const meta = useMeta();
   const theme = useCubeTheme();
   const bindings = useMemo(() => [value, color], [value, color]);
   const query = usePrepareDimensionCubeQuery(bindings, undefined, baseQuery);
+  const meta = useMetaForQuery(query);
   const { lastResults, error, isLoading } = useDashboardCubeQuery(query);
 
   const { option, otherValues } = useMemo(() => {

@@ -8,6 +8,7 @@ export * from './context/context';
 export * from './hooks/use-caching-cube-query';
 export * from './hooks/use-dashboard-cube-query';
 export * from './hooks/use-deep-memo';
+export * from './hooks/use-dimension-title';
 export * from './hooks/use-last-value';
 export * from './hooks/use-list-helpers';
 export * from './hooks/use-prepare-dimension-cube-query';

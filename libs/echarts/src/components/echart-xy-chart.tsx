@@ -1,25 +1,25 @@
 import { NonIdealState, Spinner } from '@blueprintjs/core';
 import { TimeDimensionGranularity } from '@cubejs-client/core';
+import {
+  CubeMeta,
+  CubevizComponent,
+  autoFormatNumber,
+  cubeAutoFormatter,
+  getCubeColumn,
+  useCubeTheme,
+  useDashboardCubeQuery,
+  useMetaForQuery,
+  usePrepareDimensionCubeQuery,
+} from '@cubeviz/core';
 import { EChartsOption, SeriesOption } from 'echarts';
 import { useCallback, useMemo } from 'react';
-import { filterNulls, Table } from 'typed-data-table';
-import { EChartsBaseComponent } from './echarts-base-component';
+import { Table, filterNulls } from 'typed-data-table';
 import { axisType } from '../utils/axis-type';
 import { binOtherRows } from '../utils/bin-other-rows';
 import { pivotData } from '../utils/pivot-data';
 import { positionTooltip } from '../utils/position-tooltip';
 import { sortChartAxis } from '../utils/sort-chart-axis';
-import {
-  autoFormatNumber,
-  cubeAutoFormatter,
-  CubeMeta,
-  CubevizComponent,
-  getCubeColumn,
-  useCubeTheme,
-  useDashboardCubeQuery,
-  useMeta,
-  usePrepareDimensionCubeQuery,
-} from '@cubeviz/core';
+import { EChartsBaseComponent } from './echarts-base-component';
 
 export interface EChartWidgetParams {
   title?: string;
@@ -54,7 +54,6 @@ export const EChartsXYChart: CubevizComponent<EChartWidgetParams> = ({
   timeDimensionGranularity,
   title,
 }) => {
-  const meta = useMeta();
   const theme = useCubeTheme();
   const bindings = useMemo(() => filterNulls([x, y, color]), [x, y, color]);
   const query = usePrepareDimensionCubeQuery(
@@ -62,6 +61,7 @@ export const EChartsXYChart: CubevizComponent<EChartWidgetParams> = ({
     timeDimensionGranularity,
     baseQuery
   );
+  const meta = useMetaForQuery(query);
   const { lastResults, error, isLoading } = useDashboardCubeQuery(query);
 
   const { option, otherValues } = useMemo(() => {

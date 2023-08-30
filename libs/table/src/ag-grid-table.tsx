@@ -6,16 +6,16 @@ import {
   getCubeColumn,
   useCubeTheme,
   useDashboardCubeQuery,
-  useMeta,
+  useMetaForQuery,
   usePrepareDimensionCubeQuery,
 } from '@cubeviz/core';
 import { ColDef } from 'ag-grid-community';
+import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
+import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import { AgGridReact } from 'ag-grid-react';
 import { useEffect, useMemo, useRef } from 'react';
 import { max, min } from 'typed-data-table';
 import { BarCellRenderer, SharedCellParams } from './bar-cell-renderer';
-import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
-import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 
 export interface TableWidgetParams {
   columns: string[];
@@ -29,13 +29,13 @@ export const AgGridTable: CubevizComponent<TableWidgetParams> = ({
   onDrillDown,
   baseQuery,
 }) => {
-  const meta = useMeta();
   const theme = useCubeTheme();
   const query = usePrepareDimensionCubeQuery(
     columns,
     timeDimensionGranularity,
     baseQuery
   );
+  const meta = useMetaForQuery(query);
   const { lastResults: results, isLoading } = useDashboardCubeQuery(query);
 
   const gridRef = useRef<AgGridReact | null>(null);
