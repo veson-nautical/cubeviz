@@ -11,6 +11,7 @@ import {
 import { RelativeDateRange } from '../types/relative-date';
 import { RelativeDateRangePicker } from './relative-date-range-picker';
 import { RelativeDateOptions } from './relative-date-picker';
+import { useMemo } from 'react';
 
 function parseDateRange(value: string[] | undefined): RelativeDateRange {
   if (!value)
@@ -27,7 +28,7 @@ function parseDateRange(value: string[] | undefined): RelativeDateRange {
 export interface CubeDateRangeProps {
   cubeBinding: string;
   value: string[];
-  setValue: React.Dispatch<React.SetStateAction<string[]>>;
+  setValue: (value: string[]) => void;
   options?: RelativeDateOptions;
   disabled?: boolean;
 }
@@ -40,6 +41,7 @@ export const CubeDateRange: CubevizComponent<CubeDateRangeProps> = ({
   setValue,
 }) => {
   const dimensionTitle = useDimensionTitle(cubeBinding);
+  const parsedValue = useMemo(() => parseDateRange(value), [value]);
   const binding = cubeBinding ?? '';
   if (!binding) {
     return (
@@ -48,21 +50,18 @@ export const CubeDateRange: CubevizComponent<CubeDateRangeProps> = ({
       </div>
     );
   }
+
   return (
     <FormGroup label={dimensionTitle} inline>
       <RelativeDateRangePicker
-        value={parseDateRange(value)}
-        setValue={(value: React.SetStateAction<RelativeDateRange>) =>
-          setValue((oldVal) => {
-            const newVal = isSetStateFunction(value)
-              ? value(parseDateRange(oldVal))
-              : value;
-            return [
-              relativeDateToString(newVal.start),
-              relativeDateToString(newVal.end),
-            ];
-          })
-        }
+        value={parsedValue}
+        setValue={(value: React.SetStateAction<RelativeDateRange>) => {
+          const newVal = isSetStateFunction(value) ? value(parsedValue) : value;
+          setValue([
+            relativeDateToString(newVal.start),
+            relativeDateToString(newVal.end),
+          ]);
+        }}
         options={{ allowFuture: false, nonEditable: disabled, ...options }}
       />
     </FormGroup>
