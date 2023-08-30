@@ -64,8 +64,8 @@ export default function Home() {
           <div className="flex gap-8 p-8">
             <CubeMultiSelect
               title="Country name"
-              labelBinding="Countries.name"
-              valueBinding="Countries.totalPopulation"
+              valueBinding="Countries.name"
+              labelBinding="Countries.totalPopulation"
               selectedItems={selectedCountries}
               setSelectedItems={(items) => {
                 setSelectedCountries(items);
@@ -74,8 +74,8 @@ export default function Home() {
             />
             {selectedCountries.length > 0 && (
               <CubeSuggest
-                labelBinding="Cities.district"
-                valueBinding="Cities.population"
+                valueBinding="Cities.district"
+                labelBinding="Cities.population"
                 selectedItem={selectedDistrict}
                 baseQuery={{
                   filters: [
