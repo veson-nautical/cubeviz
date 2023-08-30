@@ -1,5 +1,13 @@
 # @cubeviz/echarts
 
+## 0.2.1
+
+### Patch Changes
+
+- 8b22f8f: fixed bugs with value binding switch and handling of multiple cubes
+- Updated dependencies [8b22f8f]
+  - @cubeviz/core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

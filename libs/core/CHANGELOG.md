@@ -1,5 +1,11 @@
 # @cubeviz/core
 
+## 0.2.1
+
+### Patch Changes
+
+- 8b22f8f: fixed bugs with value binding switch and handling of multiple cubes
+
 ## 0.2.0
 
 ### Minor Changes
