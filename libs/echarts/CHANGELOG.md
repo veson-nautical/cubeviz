@@ -4,6 +4,14 @@
 
 ### Patch Changes
 
+- dc0cbcf: add date range picker, rename select args
+- Updated dependencies [dc0cbcf]
+  - @cubeviz/core@0.1.3
+
+## 0.1.2
+
+### Patch Changes
+
 - e388efc: add readmes for libs
 - Updated dependencies [e388efc]
   - @cubeviz/core@0.1.2
