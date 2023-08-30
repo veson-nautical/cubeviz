@@ -1,5 +1,11 @@
 # @cubeviz/table
 
+## 0.2.2
+
+### Patch Changes
+
+- 61b6807: remove css importing
+
 ## 0.2.1
 
 ### Patch Changes
