@@ -25,19 +25,19 @@ export function useSelectItemsQuery(
 
   const items = useMemo(() => {
     if (lastResults) {
-      return lastResults.rawData().map(
-        (row) =>
-          ({
-            value: row[labelBinding],
-            label: valueBindingPresent
-              ? parseInt(row[valueBindingPresent]).toLocaleString(undefined, {
-                  minimumFractionDigits: 0,
-                }) + ` ${meta.measures[valueBindingPresent].shortTitle}`
-              : undefined,
-            text: row[labelBinding],
-            row,
-          } as BlueprintSelectItem)
-      );
+      return lastResults.rawData().map((row) => {
+        const valueBinding = valueBindingPresent
+          ? parseInt(row[valueBindingPresent]).toLocaleString(undefined, {
+              minimumFractionDigits: 0,
+            }) + ` ${meta.measures[valueBindingPresent].shortTitle}`
+          : undefined;
+        return {
+          label: row[labelBinding],
+          value: valueBinding,
+          text: valueBinding,
+          row,
+        } as BlueprintSelectItem;
+      });
     }
     return [];
   }, [lastResults, labelBinding, valueBindingPresent, meta]);
