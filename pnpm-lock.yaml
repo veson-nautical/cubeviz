@@ -55,6 +55,9 @@ importers:
       '@next/font':
         specifier: 13.1.1
         version: 13.1.1
+      ag-grid-community:
+        specifier: ^28.1.1
+        version: 28.2.1
       next:
         specifier: 13.1.1
         version: 13.1.1(react-dom@18.2.0)(react@18.2.0)(sass@1.57.1)

@@ -10,8 +10,6 @@ import {
   usePrepareDimensionCubeQuery,
 } from '@cubeviz/core';
 import { ColDef } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
-import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import { AgGridReact } from 'ag-grid-react';
 import { useEffect, useMemo, useRef } from 'react';
 import { max, min } from 'typed-data-table';

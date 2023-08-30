@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@blueprintjs/core": "^4.5.1",
-    "@blueprintjs/icons": "^5.0.0",
     "@blueprintjs/datetime": "^4.4.23",
+    "@blueprintjs/icons": "^5.0.0",
     "@blueprintjs/popover2": "^1.13.8",
     "@blueprintjs/select": "^4.9.8",
     "@cubejs-client/core": "^0.30.64",
@@ -22,6 +22,7 @@
     "@cubeviz/inputs": "workspace:*",
     "@cubeviz/table": "workspace:*",
     "@next/font": "13.1.1",
+    "ag-grid-community": "^28.1.1",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
