@@ -1,5 +1,16 @@
 # @cubeviz/echarts
 
+## 0.2.0
+
+### Minor Changes
+
+- 24d14cc: minor bump for arg change
+
+### Patch Changes
+
+- Updated dependencies [24d14cc]
+  - @cubeviz/core@0.2.0
+
 ## 0.1.2
 
 ### Patch Changes

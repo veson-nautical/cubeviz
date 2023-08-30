@@ -1,5 +1,15 @@
 # demo-app
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies [24d14cc]
+  - @cubeviz/core@0.2.0
+  - @cubeviz/echarts@0.2.0
+  - @cubeviz/inputs@0.2.0
+  - @cubeviz/table@0.2.0
+
 ## 0.0.4
 
 ### Patch Changes
