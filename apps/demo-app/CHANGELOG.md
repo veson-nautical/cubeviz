@@ -1,5 +1,12 @@
 # demo-app
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [2790496]
+  - @cubeviz/inputs@0.2.2
+
 ## 0.0.6
 
 ### Patch Changes

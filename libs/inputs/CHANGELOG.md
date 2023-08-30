@@ -1,5 +1,11 @@
 # @cubeviz/inputs
 
+## 0.2.2
+
+### Patch Changes
+
+- 2790496: fix related to handling of value bindings
+
 ## 0.2.1
 
 ### Patch Changes
